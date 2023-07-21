@@ -78,7 +78,7 @@ export const TodoList = () => {
   const [parent] = useAutoAnimate();
 
 
-  const listStatuses = ['All', 'pending', 'completed'];
+  const listStatuses = ['all', 'pending', 'completed'];
 
   const clickStatusTodo = (e: React.MouseEvent<HTMLButtonElement>, status: string, id: number) => {
     setStatusFilter(status);
@@ -86,7 +86,7 @@ export const TodoList = () => {
   }
 
 
-  const filteredTodos = statusFilter === 'All' ? todos : todos.filter(todo => todo.status === statusFilter);
+  const filteredTodos = statusFilter === 'all' ? todos : todos.filter(todo => todo.status === statusFilter);
 
   const apiContext = api.useContext();
 
@@ -114,7 +114,7 @@ export const TodoList = () => {
             key={id}
             id={String(id)}
             onClick={(e) => clickStatusTodo(e, s, id)}
-            className={`border border-gray-200 rounded-full py-3 px-6 font-medium hover:text-white delay-200 transition duration-300 ease-out hover:bg-gray-600 ${currentId === id ? "bg-gray-700 text-white" : "bg-white text-gray-700"}`}>
+            className={`border capitalize border-gray-200 rounded-full py-3 px-6 font-bold text-sm hover:text-white delay-200 transition duration-300 ease-out hover:bg-gray-600 ${currentId === id ? "bg-gray-700 text-white" : "bg-white text-gray-700"}`}>
             {s}
           </button>
         )}

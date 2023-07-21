@@ -96,7 +96,7 @@ export const CreateTodoForm: React.FC = () => {
           };
           setTodoBody("");
         }}
-        className="px-5 py-2 rounded-full bg-gray-700 text-white"
+        className="px-5 py-2 rounded-full text-sm bg-gray-700 text-white"
       >
         Add
       </button>
