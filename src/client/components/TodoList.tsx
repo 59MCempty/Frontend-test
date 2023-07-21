@@ -145,7 +145,7 @@ export const TodoList = () => {
                   </Checkbox.Indicator>
                 </Checkbox.Root>
 
-                <label className={`block pl-3 font-medium ${todo.status === 'completed' ? "line-through cursor-pointer capitalize text-gray-500" : ""}`} htmlFor={String(todo.id)}>
+                <label className={`block pl-3 text-base font-medium ${todo.status === 'completed' ? "line-through cursor-pointer capitalize text-gray-500" : ""}`} htmlFor={String(todo.id)}>
                   {todo.body}
                 </label>
               </div>
