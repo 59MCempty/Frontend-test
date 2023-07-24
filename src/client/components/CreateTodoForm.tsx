@@ -1,7 +1,8 @@
-import { useRef, useState } from "react";
+import { log } from 'console'
 
-import { api } from "@/utils/client/api";
-import { log } from "console";
+import { useRef, useState } from 'react'
+
+import { api } from '@/utils/client/api'
 
 /**
  * QUESTION 1:
@@ -25,45 +26,41 @@ import { log } from "console";
  */
 
 export const CreateTodoForm: React.FC = () => {
-  const [todoBody, setTodoBody] = useState("");
+  const [todoBody, setTodoBody] = useState('')
 
-  const inputRef = useRef<HTMLInputElement>(null);
-
+  const inputRef = useRef<HTMLInputElement>(null)
 
   const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
-    console.log("Form submitted!");
-  };
+    event.preventDefault()
+    console.log('Form submitted!')
+  }
 
   // hit ENTER to add new todo
   const handleEnterPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter") {
-      
+    if (event.key === 'Enter') {
       // check input empty
-      if (todoBody !== "") {
-        alert("please type something")
-      }
-      else {
-        event.currentTarget.blur();
-        handleSubmit(event);
+      if (todoBody !== '') {
+        alert('please type something')
+      } else {
+        event.currentTarget.blur()
+        handleSubmit(event)
       }
     }
-  };
+  }
 
-
-  const apiContext = api.useContext();
+  const apiContext = api.useContext()
   const { mutate: createTodo, isLoading: isCreatingTodo } =
     api.todo.create.useMutation({
       onSuccess: () => {
-        apiContext.todo.getAll.refetch();
-      }
-    });
-
+        apiContext.todo.getAll.refetch()
+      },
+    })
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="group flex items-center justify-between rounded-12 border border-gray-200 py-2 pr-4 focus-within:border-gray-400">
+      className="group flex items-center justify-between rounded-12 border border-gray-200 py-2 pr-4 focus-within:border-gray-400"
+    >
       <label htmlFor={TODO_INPUT_ID} className="sr-only">
         Add todo
       </label>
@@ -76,7 +73,7 @@ export const CreateTodoForm: React.FC = () => {
         placeholder="Add todo"
         value={todoBody}
         onChange={(e) => {
-          setTodoBody(e.target.value);
+          setTodoBody(e.target.value)
         }}
         className="flex-1 px-4 text-base placeholder:text-gray-400 focus:outline-none"
       />
@@ -86,22 +83,21 @@ export const CreateTodoForm: React.FC = () => {
         disabled={isCreatingTodo}
         onClick={() => {
           // check input empty
-          if (todoBody !== "") {
+          if (todoBody !== '') {
             createTodo({
-              body: todoBody
+              body: todoBody,
             })
+          } else {
+            alert('please enter todo')
           }
-          else {
-            alert("please enter todo")
-          };
-          setTodoBody("");
+          setTodoBody('')
         }}
-        className="px-5 py-2 rounded-full text-sm bg-gray-700 text-white"
+        className="rounded-full bg-gray-700 px-5 py-2 text-sm text-white"
       >
         Add
       </button>
     </form>
-  );
-};
+  )
+}
 
-const TODO_INPUT_ID = "todo-input-id";
+const TODO_INPUT_ID = 'todo-input-id'
